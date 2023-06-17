@@ -10,7 +10,6 @@ const apiRouter = require('./routes/apiRouter');
 const dotenv = require('dotenv').config()
 
 app.use(express.json());
-app.use(express.urlencoded({extended: false}));
 // app.use(express.urlencoded({ extended: true }));
 
 // WHERE IS THE MONGO_URI?
