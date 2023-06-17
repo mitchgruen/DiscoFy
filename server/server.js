@@ -3,10 +3,11 @@ const app = express();
 const mongoose = require('mongoose');
 const path = require('path');
 const PORT = 3000;
+//this is the problem
 const userRouter = require('./routes/userRouter');
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// app.use(express.urlencoded({ extended: true }));
 
 //user routes
 

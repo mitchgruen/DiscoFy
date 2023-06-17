@@ -4,10 +4,8 @@ const userRouter = express.Router();
 
 
 //create a user in the database
-userRouter.post('/', userController, (req, res) => {
+userRouter.post('/', userController.createUser, (req, res) => {
   res.status(200).json(res.locals.newUser);
 })
-
-
 
 module.exports = userRouter;
