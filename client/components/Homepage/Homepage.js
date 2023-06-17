@@ -1,5 +1,5 @@
 import React from "react";
-import styles from './Homepage.js'
+import styles from './Homepage.scss'
 import Button from 'react-bootstrap/Button';
 
 import { Link } from "react-router-dom";
@@ -11,7 +11,6 @@ export const Homepage = () => {
       fetch('URL')
         .then(data => { return data.json() })
         .then((data) => {
-
         }).catch((err) => {
           console.log(err, 'error on the fetch get request')
         })
@@ -19,12 +18,19 @@ export const Homepage = () => {
   }
   return (
     <div>
-      <h1>testing from the home page</h1>
-      <Link to="/idea">  <button>Generate Event Ideas</button></Link>
+      <div className="h1-container"><h2>Need Weekend Plans?</h2></div>
+      <div className="generate-button-container">
+        <Button onClick={() => { buttonHandler }} className="generate-button" size="lg" variant="warning">Generate Event Ideas</Button>{' '}
+      </div>
       <form>
-        <input type="text" className="input-box" placeholder="Your Idea"></input>
-        <button type="submit">Submit</button>
+        <div className="form-content"><input type="text" className="input-box" placeholder="Your Idea"></input>
+          <Button type="submit" variant="primary">Submit</Button>{' '}
+        </div>
+        <div className="redirect-idea-container">
+          <Link to="/idea">
+            <Button variant="info">See All Ideas</Button>{' '}
+          </Link></div>
       </form>
-    </div>
+    </div >
   )
 }
