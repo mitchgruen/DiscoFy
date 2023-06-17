@@ -7,7 +7,7 @@ import { Idea } from '../Idea/Idea'
 import { Signup } from '../Signup/Signup'
 import { NotFound } from '../NotFound/NotFound'
 import { Link } from "react-router-dom";
-import styles from './App.scss';
+import './App.scss';
 export function App() {
   return (
     <>
