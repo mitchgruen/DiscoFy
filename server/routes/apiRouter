@@ -1,0 +1,9 @@
+const express = require('express');
+const apiController = require('../controller/apiController');
+const apiRouter = express.Router();
+
+apiRouter.post('/', apiController.completion, (req, res) => {
+  res.status(200).json(res.locals.ideas);
+})
+
+module.exports = apiRouter;
