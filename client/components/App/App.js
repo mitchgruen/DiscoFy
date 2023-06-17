@@ -18,10 +18,13 @@ export function App() {
         <li>
           <Link to="/signup">Signup</Link>
         </li>
+        <li>
+          <Link to="/login">Login Page</Link>
+        </li>
       </ul>
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/homepage" element={<Homepage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Homepage />} />
         <Route path="/signup" element={< Signup />} />
         <Route path="/idea" element={< Idea />} />
         {/* this route is for pages that doesn't exist.  */}

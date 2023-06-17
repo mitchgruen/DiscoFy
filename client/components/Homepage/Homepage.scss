@@ -1,0 +1,49 @@
+body {
+  background-color: #D9AFD9;
+  background-image: linear-gradient(0deg, #D9AFD9 0%, #97D9E1 100%);
+  background-attachment: fixed;
+}
+
+body h2 {
+  font-size: 5rem;
+  text-align: center;
+  margin: 50 0 50 0
+}
+
+// h1-container {
+//   display: flex;
+//   justify-content: center;
+// }
+
+.generate-button {
+  width: 500px;
+  // font-size: 200px;
+  // padding: 1000px;
+}
+
+.btn-warning {
+  font-size: 200px;
+  padding: 1000px;
+}
+
+.generate-button-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0 0 0
+}
+
+.form-content {
+  display: flex;
+  justify-content: center;
+  margin: 50px;
+  gap: 10px;
+}
+
+.redirect-idea-container {
+  display: flex;
+  justify-content: center;
+}
+
+.input-box {
+  width: 500px;
+}
