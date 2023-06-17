@@ -6,4 +6,6 @@ apiRouter.post('/', apiController.completion, (req, res) => {
   res.status(200).json(res.locals.ideas);
 })
 
+
+
 module.exports = apiRouter;

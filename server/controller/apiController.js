@@ -1,13 +1,14 @@
-const {Configuration, OpenAIApi } = require('openai')
+// const {Configuration, OpenAIApi } = require('openai')
+const Api = require('../model/apiModel');
 const ApiController = {};
-const configuration = new Configuration({
-  apiKey: process.env.OPEN_AI_API_KEY, 
-})
-const openai = new OpenAIApi(configuration)
+// const configuration = new Configuration({
+//   apiKey: process.env.OPEN_AI_API_KEY, 
+// })
+// const openai = new OpenAIApi(configuration)
 
 ApiController.completion = async (req, res, next) => {
   const {input} = req.body;
-
+  console.log('completion is activated')
   fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
     body: JSON.stringify({
@@ -15,15 +16,18 @@ ApiController.completion = async (req, res, next) => {
       messages:[{role: "user", content: "List of 10 ideas of fun things to do in New York City"}]
     }),
     headers: {
-      Authorization: 'Bearer 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',
+      Authorization: 'Bearer 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',
       'Content-Type': 'Application/json'
     }
   })
   .then(response => response.json())
-  .then((data) => {
+  .then( async (data) => {
     console.log('WOOOOOOOW', data)
     console.log('YEEEEEEOBJECTS', data.choices[0].message.content);
-    res.locals.ideas = data.choices[0].message.content
+    const response = await Api.create({
+      messages: data.choices[0].message.content
+    })
+    res.locals.ideas = response;
     next()
   })
 }
