@@ -5,6 +5,7 @@ const path = require('path');
 const PORT = 3000;
 //this is the problem
 const userRouter = require('./routes/userRouter');
+const apiRouter = require('./routes/apiRouter');
 
 const dotenv = require('dotenv').config()
 
@@ -24,6 +25,7 @@ mongoose.connection.once('open', () => {
 
 //user routes
 app.use('/user', userRouter);
+app.use('/api', apiRouter);
 
 //catch an error
 
