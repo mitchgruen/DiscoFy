@@ -4,9 +4,9 @@ const userRouter = express.Router();
 
 
 //create a user in the database
-userRouter.post('/', userController, (req, res) => {
-  res.status(200).json(res.locals.newUser);
-})
+// userRouter.post('/', userController, (req, res) => {
+//   res.status(200).json(res.locals.newUser);
+// })
 
 
 
