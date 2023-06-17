@@ -3,7 +3,7 @@ import { Login } from '../Login/Login';
 import { Homepage } from '../Homepage/Homepage'
 import { Idea } from '../Idea/Idea'
 import { Signup } from '../Signup/Signup'
-import { NotFound } from '../Not Found/NotFound'
+import { NotFound } from '../NotFound/NotFound'
 import { Link } from "react-router-dom";
 import styles from './App.scss';
 export function App() {
