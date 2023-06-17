@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import styles from './Login.scss'
+import Button from 'react-bootstrap/Button';
+
 //import PropTypes from 'prop-types';
 
-import './Login.scss';
+
 
 // async function loginUser(credentials) {
 //     return fetch('http://localhost:8080/login', {
@@ -33,14 +36,14 @@ export function Login() {
       <form >
         <label>
           <p>Username</p>
-          <input type="text" onChange={e => setUserName(e.target.value)}/>
+          <input type="text" placeholder='Enter username' onChange={e => setUserName(e.target.value)}/>
         </label>
         <label>
           <p>Password</p>
-          <input type="password" onChange={e => setPassword(e.target.value)}/>
+          <input type="password" placeholder='Enter password' onChange={e => setPassword(e.target.value)}/>
         </label>
         <div>
-          <button type="submit">Submit</button>
+        <Button type="submit" variant="primary">Submit</Button>{' '}
         </div>
       </form>
     </div>
