@@ -1,5 +1,9 @@
 const User = require('../model/userModel');
-const UserController = {}
+const {Configuration, OpenAI } = require('openai')
+const UserController = {};
+const configuration = new Configuration({
+  apiKey: process.env.OPENAI_API_KEY
+})
 
 UserController.createUser = async (req, res, next) => {
   try {
