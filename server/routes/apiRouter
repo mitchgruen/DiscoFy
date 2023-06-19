@@ -6,6 +6,9 @@ apiRouter.post('/', apiController.completion, (req, res) => {
   res.status(200).json(res.locals.ideas);
 })
 
+apiRouter.get('/', apiController.getApi, (req, res) => {
+  res.status(200).json(res.locals.messages);
+})
 
 
 module.exports = apiRouter;

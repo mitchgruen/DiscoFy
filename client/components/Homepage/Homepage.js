@@ -11,11 +11,14 @@ export const Homepage = () => {
   const buttonHandler = () => {
     console.log('buttonHandle activated')
     // useEffect(() => {
-      fetch('http://localhost:3000/api') 
-        // .then((data) => {data.json()})
+      fetch('http://localhost:3000/api', {
+        method: "GET",
+        headers: {'Content-Type': 'application/json'}
+      }) 
+        .then((data) => data.json())
         .then((data) => {
           console.log('MEEOWWW', data);
-          setChatMessage(data);
+          setChatMessage(data[0].messages);
           console.log('MEOWW2', chatMessage);
         }).catch((err) => {
           console.log(err, 'error on the fetch get request')
@@ -44,7 +47,7 @@ export const Homepage = () => {
       <div className="generate-button-container">
         <Button onClick={ buttonHandler } className="generate-button" size="lg" variant="warning">Generate Event Ideas</Button>{' '}
       </div>
-      <div><input></input></div>
+      <div className="swag">{chatMessage}</div>
       <form onSubmit={submitHandler}>
         <div className="form-content">
         <input onClick={() => setUserInput(e.target.value)} type="text" className="input-box" placeholder="Your Idea"></input>
