@@ -7,7 +7,7 @@ const ApiController = {};
 // const openai = new OpenAIApi(configuration)
 
 ApiController.completion = async (req, res, next) => {
-  const {input} = req.body;
+  // const {input} = req.body;
   console.log('completion is activated')
   fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
@@ -16,7 +16,7 @@ ApiController.completion = async (req, res, next) => {
       messages:[{role: "user", content: "List of 10 ideas of fun things to do in New York City"}]
     }),
     headers: {
-      Authorization: 'Bearer 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',
+      Authorization: 'Bearer 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',
       'Content-Type': 'Application/json'
     }
   })
@@ -28,10 +28,21 @@ ApiController.completion = async (req, res, next) => {
       messages: data.choices[0].message.content
     })
     res.locals.ideas = response;
+    console.log('OKK', res.locals.ideas)
     next()
   })
 }
 
+ApiController.getApi = async (req, res, next) => {
+  try {
+    const response = await Api.find({})
+    res.locals.messages = response;
+    return next();
+    }
+  catch (err) {
+    return next(err);
+  }
+}
 /*
 fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
