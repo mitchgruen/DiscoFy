@@ -2,11 +2,11 @@ const express = require('express');
 const apiController = require('../controller/apiController');
 const apiRouter = express.Router();
 
-apiRouter.post('/', apiController.completion, (req, res) => {
+apiRouter.post('/', (req, res) => {
   res.status(200).json(res.locals.ideas);
 })
 
-apiRouter.get('/', apiController.getApi, (req, res) => {
+apiRouter.get('/', (req, res) => {
   res.status(200).json(res.locals.messages);
 })
 
