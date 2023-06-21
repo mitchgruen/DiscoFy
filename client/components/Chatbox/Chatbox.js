@@ -19,23 +19,15 @@ const Chatbox = () => {
   }
 
   const fetchData = async () => {
-    console.log('In the fetch request');
-    const response = await axios.post(
-      "https://api.openai.com/v1/chat/completions",
-      {
-        //prompt: `Complete this sentence: "${input}"`,
-        "model": "gpt-3.5-turbo",
-        "max_tokens": 100,
-        "messages": [{"role": "system", "content": `${input}`}]
-      },
-      {
-        headers: {
-          // "Content-Type": "application/json",
-          "Authorization": "Bearer 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"
-        },
+    // this should make the post request to /api
+    const response = await fetch ('http://localhost:3000/api', {
+      method: 'POST',
+      body: {
+        input: input
       }
-    );
-    return response.data.choices[0].message.content;
+    }).then(response => {
+      console.log(response);
+    })
   };
 
 

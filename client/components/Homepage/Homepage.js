@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import styles from './Homepage.scss'
 import Button from 'react-bootstrap/Button';
 import Chatbox from '../Chatbox/Chatbox.js';
+import NewActivity from '../NewActivity/NewActivity.js';
 
 import { Link } from "react-router-dom";
 export const Homepage = () => {
@@ -44,6 +45,13 @@ export const Homepage = () => {
         console.log(err)
       });
   }
+
+  const activity = {
+    activity: "Pioneers Bar NYC",
+    location: "138 W 29th St, New York, NY 10001",
+    time: "7:00pm",
+    summary: "Laid-back, late-night hangout offering craft beers on tap, bar snacks, pinball machines & pool. PIONEERS is steps away from Penn Station, Madison Square Garden, The PIT Comedy Theater …plus Herald Square, the Fashion Institute of Technology (FIT) and the world-famous Chelsea Hotel."
+  }
   
   return (
     <div>
@@ -52,17 +60,10 @@ export const Homepage = () => {
         <Button onClick={ (e)=> buttonHandler(e) } className="generate-button" size="lg" variant="warning">Generate Event Ideas</Button>{' '}
       </div> */}
       <Chatbox />
-      <div className="swag">{chatMessage}</div>
-      <form onSubmit={(e) => submitHandler(e)}>
-        <div className="form-content">
-        <input onClick={(e) => setUserInput(e.target.value)} type="text" className="input-box" placeholder="Your Idea"></input>
-          <Button type="submit" variant="primary">Submit</Button>{' '}
-        </div>
-        <div className="redirect-idea-container">
-          <Link to="/idea">
-            <Button variant="info">See All Ideas</Button>{' '}
-          </Link></div>
-      </form>
+      <h1 className="form-content">New Ideas</h1>
+      <NewActivity activity={activity}/>
+      <NewActivity />
+      <NewActivity />
     </div >
   )
 }
