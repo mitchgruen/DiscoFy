@@ -16,7 +16,9 @@ const Chatbox = () => {
       const response = await axios.post("http://localhost:8000/api", {
         prompt: "movie",
       });
-      // const data = response.data;
+      console.log(response);
+      const data = JSON.parse(response.data);
+      console.log(data);
       // setCompletedSentence(data);
     } catch (error) {
       console.error(error);

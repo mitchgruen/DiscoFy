@@ -21,11 +21,11 @@ ApiController.getResponse = async (req, res, next) => {
       "https://api.openai.com/v1/chat/completions",
       {
         model: "gpt-3.5-turbo",
-        max_tokens: 200,
+        max_tokens: 400,
         messages: [
           {
             role: "system",
-            content: `given the prompt: ${prompt}, show me some related activities I can do in New York. The response must be a JSON object with the following properties: Event, Location, Time, Summary`,
+            content: `given the prompt: , show me three related activities I can do in New York. The response must be a JSON object with the name Events following properties: Event, Location, Time, Summary`,
           },
         ],
       },
@@ -33,8 +33,9 @@ ApiController.getResponse = async (req, res, next) => {
         headers: headers,
       }
     );
-    console.log(response.data.choices[0].message);
-    res.locals.gpt = response.data;
+    const events = response.data.choices[0].message.content;
+    res.locals.gpt = events;
+    return next();
   } catch (err) {
     console.error(err);
     next(err);
