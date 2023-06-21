@@ -1,0 +1,46 @@
+.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  width: 600px !important;
+
+  background-color: white;
+  border-radius: 15px;
+  padding: 10px;
+  margin: 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-areas:
+      "a a a"
+      "l l l";
+  padding: 0px;
+}
+
+.activity {
+  grid-area: a;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.location {
+  grid-area: l;
+  display: flex;
+  align-items: center;
+}
+
+.time {
+  grid-area: t;
+}
+
+.summary {
+  grid-area: s;
+}

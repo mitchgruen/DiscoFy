@@ -100,7 +100,11 @@ app.get("/schedule_event", async (req, res) => {
 //   console.log("Connected to Database");
 // });
 
-//catch an error
+app.get('/', (req, res) => {
+  console.log('Hello from the backend');
+})
+
+
 
 // app.listen(PORT, () => console.log(`Listening on PORT: ${PORT}`));
 app.use("*", (req, res) => res.status(400).send("Oh no! There is an error!"));
