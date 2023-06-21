@@ -7,9 +7,17 @@ const { google } = require("googleapis");
 const dotenv = require("dotenv");
 const dayjs = require("dayjs");
 const PORT = 8000;
-//this is the problem
-
 dotenv.config();
+//this is the problem
+const uri = process.env.ATLAS_URI;
+mongoose.connect(uri, { useNewUrlParser: true }
+);
+const connection = mongoose.connection;
+connection.once('open', () => {
+  console.log("MongoDB database connection established successfully");
+})
+
+
 
 app.use(cors());
 app.use(express.json());
