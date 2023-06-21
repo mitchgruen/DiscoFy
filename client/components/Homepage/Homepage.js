@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import styles from './Homepage.scss'
 import Button from 'react-bootstrap/Button';
+import Chatbox from '../Chatbox/Chatbox.js';
 
 import { Link } from "react-router-dom";
 export const Homepage = () => {
@@ -8,25 +9,27 @@ export const Homepage = () => {
   const [chatMessage, setChatMessage] = useState('');
   const [userInput, setUserInput] = useState('');
   // make a get request to chatgbt to display response. 
-  const buttonHandler = () => {
-    console.log('buttonHandle activated')
-    // useEffect(() => {
-      fetch('http://localhost:3000/api', {
-        method: "GET",
-        headers: {'Content-Type': 'application/json'}
-      }) 
-        .then((data) => data.json())
-        .then((data) => {
-          console.log('MEEOWWW', data);
-          setChatMessage(data[0].messages);
-          console.log('MEOWW2', chatMessage);
-        }).catch((err) => {
-          console.log(err, 'error on the fetch get request')
-        })
-    // }, [])
-  }
+
+  // const buttonHandler = () => {
+  //   console.log('buttonHandle activated')
+  //   // useEffect(() => {
+  //     fetch('http://localhost:3000/api', {
+  //       method: "GET",
+  //       headers: {'Content-Type': 'application/json'}
+  //     }) 
+  //       .then((data) => data.json())
+  //       .then((data) => {
+  //         console.log('MEEOWWW', data);
+  //         setChatMessage(data[0].messages);
+  //         console.log('MEOWW2', chatMessage);
+  //       }).catch((err) => {
+  //         console.log(err, 'error on the fetch get request')
+  //       })
+  //   // }, [])
+  // }
+
   //handle submissions to the database from input field
-  const submitHandler = () => {
+  const submitHandler = (e) => {
     e.preventDefault()
     fetch(('URL'), {
       method: "POST",
@@ -41,16 +44,18 @@ export const Homepage = () => {
         console.log(err)
       });
   }
+  
   return (
     <div>
       <div className="h1-container"><h2>Need Weekend Plans?</h2></div>
-      <div className="generate-button-container">
-        <Button onClick={ buttonHandler } className="generate-button" size="lg" variant="warning">Generate Event Ideas</Button>{' '}
-      </div>
+      {/* <div className="generate-button-container">
+        <Button onClick={ (e)=> buttonHandler(e) } className="generate-button" size="lg" variant="warning">Generate Event Ideas</Button>{' '}
+      </div> */}
+      <Chatbox />
       <div className="swag">{chatMessage}</div>
-      <form onSubmit={submitHandler}>
+      <form onSubmit={(e) => submitHandler(e)}>
         <div className="form-content">
-        <input onClick={() => setUserInput(e.target.value)} type="text" className="input-box" placeholder="Your Idea"></input>
+        <input onClick={(e) => setUserInput(e.target.value)} type="text" className="input-box" placeholder="Your Idea"></input>
           <Button type="submit" variant="primary">Submit</Button>{' '}
         </div>
         <div className="redirect-idea-container">

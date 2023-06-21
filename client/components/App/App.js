@@ -6,7 +6,10 @@ import { Idea } from "../Idea/Idea";
 import { Signup } from "../Signup/Signup";
 import { NotFound } from "../NotFound/NotFound";
 import { Link } from "react-router-dom";
-import "./App.scss";
+import './App.scss';
+
+//mongoose.connect(process.env.ADMIN_ID);
+
 export function App() {
   return (
     <>
