@@ -21,6 +21,12 @@ const apiRouter = require("./routes/apiRouter");
 app.use("/user", userRouter);
 app.use("/api", apiRouter);
 
+const apiController = require("./controller/apiController");
+
+apiRouter.post("/", apiController.getResponse, (req, res) => {
+  res.status(200).json(res.locals.ideas);
+});
+
 const oauth2Client = new google.auth.OAuth2(
   process.env.CLIENT_ID,
   process.env.CLIENT_SECRET,

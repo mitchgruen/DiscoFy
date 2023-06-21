@@ -1,10 +1,45 @@
 // const {Configuration, OpenAIApi } = require('openai')
-const Api = require('../model/apiModel');
+const axios = require("axios");
+const Api = require("../model/apiModel");
+const dotenv = require("dotenv");
 const ApiController = {};
+dotenv.config();
 // const configuration = new Configuration({
-//   apiKey: process.env.OPEN_AI_API_KEY, 
+//   apiKey: process.env.OPEN_AI_API_KEY,
 // })
 // const openai = new OpenAIApi(configuration)
+
+ApiController.getResponse = async (req, res, next) => {
+  const { prompt } = req.body; // assuming your prompt is coming in the request body
+
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${process.env.OPEN_AI_API_KEY}`,
+  };
+  try {
+    const response = await axios.post(
+      "https://api.openai.com/v1/chat/completions",
+      {
+        model: "gpt-3.5-turbo",
+        max_tokens: 200,
+        messages: [
+          {
+            role: "system",
+            content: `given the prompt: ${prompt}, show me some related activities I can do in New York. The response must be a JSON object with the following properties: Event, Location, Time, Summary`,
+          },
+        ],
+      },
+      {
+        headers: headers,
+      }
+    );
+    console.log(response.data.choices[0].message);
+    res.locals.gpt = response.data;
+  } catch (err) {
+    console.error(err);
+    next(err);
+  }
+};
 
 // ApiController.completion = async (req, res, next) => {
 //   // const {input} = req.body;
