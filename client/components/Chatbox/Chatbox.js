@@ -31,7 +31,7 @@ const Chatbox = () => {
       {
         headers: {
           // "Content-Type": "application/json",
-          "Authorization": "Bearer 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"
+          "Authorization": "Bearer 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"
         },
       }
     );
