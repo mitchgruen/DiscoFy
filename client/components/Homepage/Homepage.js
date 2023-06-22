@@ -38,6 +38,7 @@ export const Homepage = (props) => {
   //handle click
   async function handleClick(e) {
     try {
+      console.log(props);
       console.log("handle");
       e.preventDefault();
       // const prompt = e.target.value;
@@ -74,9 +75,9 @@ export const Homepage = (props) => {
         handleChange={handleChange}
       />
       <h1 className="form-content">New Ideas</h1>
-      <NewActivity activity={activity[0]} />
-      <NewActivity activity={activity[1]} />
-      <NewActivity activity={activity[2]} />
+      <NewActivity user={props} sendEvent={sendEvent} activity={activity[0]} />
+      <NewActivity user={props} sendEvent={sendEvent} activity={activity[1]} />
+      <NewActivity user={props} sendEvent={sendEvent} activity={activity[2]} />
     </div>
   );
 };

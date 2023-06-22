@@ -7,10 +7,25 @@ import { Link } from "react-router-dom";
 // in the next copmponent up we'll push in three of these newactivity components
 const NewActivity = (props) => {
   // console.log("Props Test", props.testActivity);
-  const { activity } = props;
+  const { activity, user, sendEvent } = props;
+  const { name, email } = user;
   const { Event, Location, Summary, Time } = activity;
   console.log(Event, Location, Summary, Time);
   console.log("Activity!!!!!!", activity);
+
+  async function sendEvent(e) {
+    e.preventDefault();
+    e.target;
+    const response = await axios.post("http://localhost:8000/event", {
+      event: Event,
+      location: Location,
+      summary: Summary,
+      time: Time,
+      name: name,
+      emails: email,
+    });
+    console.log(response);
+  }
 
   return (
     <div className="container">
@@ -19,6 +34,7 @@ const NewActivity = (props) => {
         <p>{Location}</p>
         <p> {Time}</p>
         <p>{Summary}</p>
+        <button onCLick={sendEvent}>Add to Event List!</button>
       </div>
     </div>
     // <div className="container">

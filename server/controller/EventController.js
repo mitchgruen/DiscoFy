@@ -10,6 +10,7 @@ eventController.saveEvent = async (req, res, next) => {
     name: name,
     emails: email,
   });
+  res.locals.savedEvent = savedEvent;
   console.log(savedEvent);
   return next();
 };
@@ -18,6 +19,7 @@ eventController.getEvents = async (req, res, next) => {
   const { email } = req.body;
   const events = await Event.find({ emails: email });
   console.log(events);
+  res.locals.events = events;
   return next();
 };
 
@@ -27,6 +29,8 @@ eventController.addPerson = async (req, res, next) => {
     { event: event },
     { $push: { email: email } }
   );
+  res.locals.added = added;
+  return next();
 };
 
-module.exports = EventController;
+module.exports = eventController;
