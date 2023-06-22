@@ -1,12 +1,10 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { Login } from "../Login/Login";
 import { Homepage } from "../Homepage/Homepage";
-import { Idea } from "../Idea/Idea";
 import { NotFound } from "../NotFound/NotFound";
 import { Link } from "react-router-dom";
-import './App.scss';
-
+import "./App.scss";
 
 export function App() {
   const [user, setUser] = useState({});
@@ -23,7 +21,6 @@ export function App() {
       <Routes>
         <Route index element={<Login setUser={setUser} />} />
         <Route path="/home" element={<Homepage user={user} />} />
-        <Route path="/idea" element={<Idea />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
