@@ -7,8 +7,7 @@ import { Signup } from "../Signup/Signup";
 import { NotFound } from "../NotFound/NotFound";
 import { Link } from "react-router-dom";
 import './App.scss';
-
-//mongoose.connect(process.env.ADMIN_ID);
+import Chat from "../MessageRoom/Chat";
 
 export function App() {
   return (
@@ -23,11 +22,15 @@ export function App() {
         <li>
           <Link to="/login">Login Page</Link>
         </li>
+        <li>
+          <Link to="/chat">Chat</Link>
+        </li>
       </ul>
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Homepage />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/chat" element={<Chat />} />
         <Route path="/idea" element={<Idea />} />
         {/* this route is for pages that doesn't exist.  */}
         <Route path="*" element={<NotFound />} />
