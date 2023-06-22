@@ -6,6 +6,7 @@ import NewActivity from "../NewActivity/NewActivity.js";
 import axios from "axios";
 
 import { Link } from "react-router-dom";
+
 export const Homepage = () => {
   const [input, setInput] = useState("");
   const [activity, setActivity] = useState([
@@ -28,6 +29,11 @@ export const Homepage = () => {
       Summary: "",
     },
   ]);
+  
+  // make a get request to chatgbt to display response.
+  useEffect(() => {
+    console.log("User: ", props);
+  }, []);
 
   //handle click
   async function handleClick(e) {

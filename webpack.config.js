@@ -16,8 +16,8 @@ module.exports = {
   devServer: {
     proxy: [
       {
-        context: ['/api/'],
-        target: 'http://localhost:3000'
+        context: ['/api'],
+        target: 'http://localhost:8000'
       }
     ]
   },

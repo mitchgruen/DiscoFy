@@ -7,9 +7,16 @@ const { google } = require("googleapis");
 const dotenv = require("dotenv");
 const dayjs = require("dayjs");
 const PORT = 8000;
-//this is the problem
 
 dotenv.config();
+//this is the problem
+const uri = process.env.ATLAS_URI;
+mongoose.connect(uri, { useNewUrlParser: true }
+);
+const connection = mongoose.connection;
+connection.once('open', () => {
+  console.log("MongoDB database connection established successfully");
+})
 
 app.use(cors());
 app.use(express.json());
@@ -45,23 +52,19 @@ app.get("/google", (req, res) => {
     access_type: "offline",
     scope: scopes,
   });
-  res.redirect(url);
+  return res.json(url);
 });
 
 app.get("/google/redirect", async (req, res) => {
-  console.log(req.query.code);
+  console.log(req.query);
   const code = req.query.code;
 
   const { tokens } = await oauth2Client.getToken(code);
+
   oauth2Client.setCredentials(tokens);
 
-  return res.send("its working");
+  return res.status(200).json({ msg: "Thank you for allowing us to access your Google Calendar!! You can close this now"});
 });
-
-// Access to users information ex: email, name
-// oauth2Client.getTokenInfo().then(info =>{
-//     info.
-// })
 
 app.get("/schedule_event", async (req, res) => {
   console.log(oauth2Client.credentials.access_token);
@@ -89,17 +92,6 @@ app.get("/schedule_event", async (req, res) => {
 
 // app.use(express.urlencoded({ extended: true }));
 
-// WHERE IS THE MONGO_URI?
-// mongoose.connect(process.env.MONGO_URI, {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// });
-
-// // confirms that the connection works (just a console log to confirm we are connected).
-// mongoose.connection.once("open", () => {
-//   console.log("Connected to Database");
-// });
-
 app.get('/', (req, res) => {
   console.log('Hello from the backend');
 })
@@ -117,15 +109,3 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
   console.log("Listening on port 8000... idea generator app");
 });
-// mongoose.connect(
-//   process.env.MONGO_URI,
-//   { useNewUrlParser: true, useUnifiedTopology: true },
-// )
-//   .then(() => {
-//     app.listen(PORT, () => {
-//       `listening on ${PORT}`
-//     });
-//     console.log('Connected to MongoDB')
-//       .catch(err => console.log(err));
-//    app.use('/', userRouter);
-//   })
