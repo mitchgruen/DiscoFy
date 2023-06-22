@@ -1,17 +1,36 @@
 import React, { useState, useEffect } from "react";
-import styles from "./NewActivity.scss";
-import Button from "react-bootstrap/Button";
-import { Link } from "react-router-dom";
 import axios from "axios";
+import socketIoClient from "socket.io-client";
+
 
 // you have to pass props into this component, and update local state based on props
 // in the next copmponent up we'll push in three of these newactivity components
 const NewActivity = (props) => {
+  const [socket, setSocket] = useState(null);
   // console.log("Props Test", props.testActivity);
   const { activity, user } = props;
   const { name, email } = user;
   const { Event, Location, Summary, Time } = activity;
-  console.log(props);
+
+  useEffect(() => {
+    const newSocket = socketIoClient("http://localhost:8000", { autoConnect: false });
+
+    // const handleNewMessage = (newMessage) => {
+    //   addMessage(newMessage);
+    // };
+
+    // newSocket.on("latest", handleNewMessage);
+    // newSocket.on("message", handleNewMessage);
+    newSocket.connect();
+
+    setSocket(newSocket);
+
+    return () => {
+      // newSocket.off("latest", handleNewMessage);
+      // newSocket.off("message", handleNewMessage);
+      newSocket.disconnect();
+    };
+  }, []);
 
   async function saveEvent(e) {
     e.preventDefault();
@@ -23,6 +42,14 @@ const NewActivity = (props) => {
       time: Time,
       name: name,
       emails: email,
+    });
+    socket.emit("event", {
+      event: Event,
+      location: Location,
+      summary: Summary,
+      time: Time,
+      name: name,
+      emails: email
     });
     console.log(response);
   }

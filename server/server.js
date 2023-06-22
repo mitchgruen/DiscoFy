@@ -96,13 +96,13 @@ const io = new Server(server, {
 io.on("connection", (socket) => {
   console.log("a user connected");
 
-  socket.on("latest", (msg) => {
-    console.log("Latest message: " + msg);
+  socket.on("latest", (event) => {
+    console.log("Latest event: " + event);
   });
 
-  socket.on("message", (msg) => {
-    console.log("Received a message: " + msg);
-    io.emit("message", msg);
+  socket.on("event", (event) => {
+    console.log("Received an event: " + event);
+    io.emit("event", event);
   });
 
   socket.on("disconnect", () => {

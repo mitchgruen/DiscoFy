@@ -41,6 +41,7 @@ export const ChatGPTForm = (props) => {
       const response = await axios.post("http://localhost:8000/api", {
         prompt: input,
       });
+      
       console.log(response);
       const data = JSON.parse(response.data);
       console.log(data);

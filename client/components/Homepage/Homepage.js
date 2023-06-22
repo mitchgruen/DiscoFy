@@ -5,6 +5,7 @@ import { ChatGPTForm } from "../ChatGPTForm/ChatGPTForm.js";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import styles from './Homepage.scss';
+import ActivityList from "../ActivityList/ActivityList.js";
 
 export const Homepage = (props) => {
   return (
@@ -22,7 +23,7 @@ export const Homepage = (props) => {
       </ul>
       <div className="mainContainer">
         <ChatGPTForm user={props.user} className="GPTForm" />
-        <div className="activityList">Activity List Goes Here</div>
+        <ActivityList />
       </div>
     </div>
   );
