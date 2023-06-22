@@ -26,6 +26,7 @@ const eventRouter = require("./routes/eventRouter");
 const userRouter = require("./routes/userRouter");
 const apiRouter = require("./routes/apiRouter");
 
+app.use('/assets', express.static(path.join(__dirname, '/server/pages/assets')));
 app.use("/user", userRouter);
 app.use("/api", apiRouter);
 app.use("/event", eventRouter);
@@ -58,9 +59,8 @@ app.get("/google/redirect", async (req, res) => {
   const code = req.query.code;
   const { tokens } = await oauth2Client.getToken(code);
   oauth2Client.setCredentials(tokens);
-  return res.status(200).json({
-    msg: "Thank you for allowing us to access your Google Calendar!! You can close this now",
-  });
+  return res.status(200).sendFile(path.join(__dirname, "./pages/assets/enjoyment.jpg"));
+
 });
 app.post("/schedule_event", async (req, res) => {
   const { event, location, summary } = req.body;
