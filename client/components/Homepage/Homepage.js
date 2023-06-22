@@ -61,9 +61,10 @@ export const Homepage = () => {
       </div> */}
       <Chatbox />
       <h1 className="form-content">New Ideas</h1>
-      <NewActivity activity={activity}/>
-      <NewActivity />
-      <NewActivity />
+      <NewActivity activity={Events[0]}/>
+      <NewActivity activity={Events[1]}/>
+      <NewActivity activity={Events[2]}/>
+
     </div >
   )
 }

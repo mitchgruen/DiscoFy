@@ -9,7 +9,16 @@ import { Link } from "react-router-dom";
 const NewActivity = (props) => {
   const [Activity, setActivity] = useState("");
 
-  console.log("Props Test", props.testActivity);
+
+  const [eventState, setEvent] = useState({});
+
+  setEvent({
+    activity:
+    location:
+    time:
+    
+  })
+
   
   useEffect(() => {
     setActivity({
