@@ -11,7 +11,7 @@ dotenv.config();
 
 ApiController.getResponse = async (req, res, next) => {
   const { prompt } = req.body; // assuming your prompt is coming in the request body
-
+  console.log("prompt", prompt);
   const headers = {
     "Content-Type": "application/json",
     Authorization: `Bearer ${process.env.OPEN_AI_API_KEY}`,
@@ -25,7 +25,7 @@ ApiController.getResponse = async (req, res, next) => {
         messages: [
           {
             role: "system",
-            content: `given the prompt: , show me three related activities I can do in New York. The response must be a JSON object with the name Events following properties: Event, Location, Time, Summary`,
+            content: `given the prompt: ${prompt}, show me three related activities I can do in New York. The response must be a JSON object with the name Events following properties: Event, Location, Time, Summary`,
           },
         ],
       },
