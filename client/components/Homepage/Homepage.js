@@ -7,7 +7,7 @@ import axios from "axios";
 
 import { Link } from "react-router-dom";
 
-export const Homepage = () => {
+export const Homepage = (props) => {
   const [input, setInput] = useState("");
   const [activity, setActivity] = useState([
     {
@@ -29,7 +29,7 @@ export const Homepage = () => {
       Summary: "",
     },
   ]);
-  
+
   // make a get request to chatgbt to display response.
   useEffect(() => {
     console.log("User: ", props);
