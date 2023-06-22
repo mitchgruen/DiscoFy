@@ -1,51 +1,30 @@
-import React, { useState } from 'react';
-import styles from './Login.scss'
-import Button from 'react-bootstrap/Button';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { signInWithGoogle } from '../firebase.js';
 
-//import PropTypes from 'prop-types';
+export function Login(props) {
+  const navigate = useNavigate();
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await signInWithGoogle().then(async (data) => {
+      const url = await fetch('http://localhost:8000/google');
+      const parsedData = await url.json();
+      console.log(parsedData);
+      window.open(parsedData, "_blank", "popup");
+      console.log("User: ", data);
+      props.setUser({
+        email: data.email,
+        name: data.displayName
+      })
+      navigate('/home');
+    });
+  }
 
-
-// async function loginUser(credentials) {
-//     return fetch('http://localhost:8080/login', {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json'
-//       },
-//       body: JSON.stringify(credentials)
-//     })
-//       .then(data => data.json())
-//    }
-
-export function Login() {
-  const [username, setUserName] = useState();
-  const [password, setPassword] = useState();
-
-//   const handleSubmit = async e => {
-//     e.preventDefault();
-//     const token = await loginUser({
-//       username,
-//       password
-//     });
-//     setToken(token);
-  //}
-
-  return(
+  return (
     <div className="login-wrapper">
       <h1>Welcome! Please Log In</h1>
-      <form >
-        <label>
-          <p>Username</p>
-          <input type="text" placeholder='Enter username' onChange={e => setUserName(e.target.value)}/>
-        </label>
-        <label>
-          <p>Password</p>
-          <input type="password" placeholder='Enter password' onChange={e => setPassword(e.target.value)}/>
-        </label>
-        <div>
-        <Button type="submit" variant="primary">Submit</Button>{' '}
-        </div>
-      </form>
+        <button onClick={handleSubmit} variant="primary">Google Log In</button>{' '}
     </div>
   )
 }

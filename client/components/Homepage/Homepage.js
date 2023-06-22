@@ -6,7 +6,7 @@ import NewActivity from "../NewActivity/NewActivity.js";
 import axios from "axios";
 
 import { Link } from "react-router-dom";
-export const Homepage = () => {
+export const Homepage = (props) => {
   const [chatMessage, setChatMessage] = useState("");
   const [userInput, setUserInput] = useState("");
   const [input, setInput] = useState("");
@@ -31,24 +31,9 @@ export const Homepage = () => {
     },
   ]);
   // make a get request to chatgbt to display response.
-
-  // const buttonHandler = () => {
-  //   console.log('buttonHandle activated')
-  //   // useEffect(() => {
-  //     fetch('http://localhost:3000/api', {
-  //       method: "GET",
-  //       headers: {'Content-Type': 'application/json'}
-  //     })
-  //       .then((data) => data.json())
-  //       .then((data) => {
-  //         console.log('MEEOWWW', data);
-  //         setChatMessage(data[0].messages);
-  //         console.log('MEOWW2', chatMessage);
-  //       }).catch((err) => {
-  //         console.log(err, 'error on the fetch get request')
-  //       })
-  //   // }, [])
-  // }
+  useEffect(() => {
+    console.log("User: ", props);
+  }, []);
 
   //handle submissions to the database from input field
   const submitHandler = (e) => {
@@ -69,14 +54,7 @@ export const Homepage = () => {
       });
   };
 
-  // Test Response
-  // const activity = {
-  //   activity: "Pioneers Bar NYC",
-  //   location: "138 W 29th St, New York, NY 10001",
-  //   time: "7:00pm",
-  //   summary:
-  //     "Laid-back, late-night hangout offering craft beers on tap, bar snacks, pinball machines & pool. PIONEERS is steps away from Penn Station, Madison Square Garden, The PIT Comedy Theater …plus Herald Square, the Fashion Institute of Technology (FIT) and the world-famous Chelsea Hotel.",
-  // };
+
   //handle click
   async function handleClick(e) {
     try {
