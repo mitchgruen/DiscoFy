@@ -62,14 +62,16 @@ app.get("/google/redirect", async (req, res) => {
     msg: "Thank you for allowing us to access your Google Calendar!! You can close this now",
   });
 });
-app.get("/schedule_event", async (req, res) => {
+app.post("/schedule_event", async (req, res) => {
+  const { event, location, summary } = req.body;
   console.log(oauth2Client.credentials.access_token);
   await calendar.events.insert({
     calendarId: "primary",
     auth: oauth2Client,
     requestBody: {
-      summary: "This is a test event",
-      description: "Some event",
+      summary: event,
+      location: location,
+      description: summary,
       start: {
         dateTime: dayjs(new Date()).add(1, "day").toISOString(),
         timeZone: "GMT-4",
