@@ -41,7 +41,7 @@ const NewActivity = (props) => {
       summary: Summary,
       time: Time,
       name: name,
-      emails: email,
+      email: email,
     });
     socket.emit("event", {
       event: Event,
@@ -49,7 +49,7 @@ const NewActivity = (props) => {
       summary: Summary,
       time: Time,
       name: name,
-      emails: email
+      email: email,
     });
     console.log(response);
   }
@@ -66,18 +66,6 @@ const NewActivity = (props) => {
         Add to Event List!
       </button>
     </div>
-    // <div className="container">
-    //   <div className="grid">
-    //     <div className="activity">
-    //       <b>{Event}</b>
-    //     </div>
-    //     <div className="location">
-    //       <b>{Location}</b>
-    //       <b>{Time}</b>
-    //     </div>
-    //   </div>
-    //   <div className="summary">{Summary}</div>
-    // </div>
   );
 };
 

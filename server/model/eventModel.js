@@ -7,6 +7,7 @@ const eventSchema = new Schema({
   time: { type: String },
   summary: { type: String },
   name: { type: String },
+  email: { type: String }
   // emails: [],
 });
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import socketIoClient from "socket.io-client";
+import axios from "axios";
 
 export default function ActivityList() {
     const [events, setEvents] = useState([]);
@@ -12,6 +13,15 @@ export default function ActivityList() {
           ...(Array.isArray(event) ? event.reverse() : [event]),
         ]);
     };
+
+    const addCalendarEvent = async (e, activity) =>  {
+        console.log(e);
+        const response = await axios.post("http://localhost:8000/schedule_event", {
+            location: activity.location,
+            summary: activity.summary,
+            event: activity.event,
+          });
+    }; 
 
     useEffect(() => {
         const newSocket = socketIoClient("http://localhost:8000", { autoConnect: false });
@@ -36,9 +46,18 @@ export default function ActivityList() {
     return (
         <div>
             <div id="eventBox">
+                <h1>Live Activities</h1>
                 {events.map((event, index) => (
                 <div key={index}>
-                    {event.summary}
+                    <h4>{event.event}</h4>
+                    <p>{event.summary}</p>
+                    <p>{event.location}</p>
+                    <p> {event.time}</p>
+                    <p> {event.name}</p>
+                    <p>{event.email}</p>
+                    <button className="button" onClick={(e) => addCalendarEvent(e, event)}>
+                        Add to Calendar!
+                    </button>    
                 </div>
                 ))}
             </div>

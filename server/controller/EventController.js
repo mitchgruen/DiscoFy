@@ -11,6 +11,7 @@ eventController.saveEvent = async (req, res, next) => {
       summary: summary,
       time: time,
       name: name,
+      email: email
       // emails: email,
     });
     res.locals.savedEvent = savedEvent;
@@ -23,8 +24,7 @@ eventController.saveEvent = async (req, res, next) => {
 };
 
 eventController.getEvents = async (req, res, next) => {
-  const { email } = req.body;
-  const events = await Event.find({ emails: email });
+  const events = await Event.find({});
   console.log(events);
   res.locals.events = events;
   return next();
