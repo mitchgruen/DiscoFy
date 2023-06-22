@@ -2,36 +2,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../Homepage/Homepage.scss";
 
-const Chatbox = () => {
-  const [input, setInput] = useState("");
+const Chatbox = (props) => {
   const [completedSentence, setCompletedSentence] = useState("");
-
-  //handle click
-  async function handleClick(e) {
-    try {
-      // console.log("handle");
-      e.preventDefault();
-      // const prompt = e.target.value;
-      // if (!input) return;
-      const response = await axios.post("http://localhost:8000/api", {
-        prompt: "movie",
-      });
-      console.log(response);
-      const data = JSON.parse(response.data);
-      console.log(data);
-      // setCompletedSentence(data);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setData({
-      ...data,
-      [e.target.name]: value,
-    });
-  };
+  const { handleClick, handleChange, input } = props;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -48,7 +21,7 @@ const Chatbox = () => {
     <div className="form-content">
       <textarea
         value={input}
-        onChange={(event) => setInput(event.target.value)}
+        onChange={handleChange}
         rows={5}
         placeholder="Need suggestions for what to do this weekend?"
       />
