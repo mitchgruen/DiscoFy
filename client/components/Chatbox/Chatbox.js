@@ -14,7 +14,7 @@ const Chatbox = (props) => {
         rows={5}
         placeholder="Need suggestions for what to do this weekend?"
       />
-      <button className="button" onClick={handleClick}>
+      <button className="button" onClick={(e) => handleClick(e)}>
         Send!
       </button>
     </div>

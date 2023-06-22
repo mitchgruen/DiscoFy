@@ -3,7 +3,6 @@ import Chatbox from "../Chatbox/Chatbox.js";
 import NewActivity from "../NewActivity/NewActivity.js";
 import axios from "axios";
 
-
 export const ChatGPTForm = (props) => {
   const [input, setInput] = useState("");
   const [activity, setActivity] = useState([
@@ -71,9 +70,9 @@ export const ChatGPTForm = (props) => {
         handleChange={handleChange}
       />
       <h1 className="form-content">New Ideas</h1>
-      <NewActivity activity={activity[0]} />
-      <NewActivity activity={activity[1]} />
-      <NewActivity activity={activity[2]} />
+      <NewActivity user={props.user} activity={activity[0]} />
+      <NewActivity user={props.user} activity={activity[1]} />
+      <NewActivity user={props.user} activity={activity[2]} />
     </div>
   );
 };

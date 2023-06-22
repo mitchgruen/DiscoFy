@@ -12,21 +12,23 @@ const { Server } = require("socket.io");
 
 dotenv.config();
 
-// const uri = process.env.ATLAS_URI;
-// mongoose.connect(uri, { useNewUrlParser: true });
-// const connection = mongoose.connection;
-// connection.once('open', () => {
-//   console.log("MongoDB database connection established successfully");
-// });
+const uri = process.env.ATLAS_URI;
+mongoose.connect(uri, { useNewUrlParser: true });
+const connection = mongoose.connection;
+connection.once("open", () => {
+  console.log("MongoDB database connection established successfully");
+});
 
 app.use(cors());
 app.use(express.json());
 
+const eventRouter = require("./routes/eventRouter");
 const userRouter = require("./routes/userRouter");
 const apiRouter = require("./routes/apiRouter");
 
 app.use("/user", userRouter);
 app.use("/api", apiRouter);
+app.use("/event", eventRouter);
 
 const apiController = require("./controller/apiController");
 
@@ -56,7 +58,9 @@ app.get("/google/redirect", async (req, res) => {
   const code = req.query.code;
   const { tokens } = await oauth2Client.getToken(code);
   oauth2Client.setCredentials(tokens);
-  return res.status(200).json({ msg: "Thank you for allowing us to access your Google Calendar!! You can close this now"});
+  return res.status(200).json({
+    msg: "Thank you for allowing us to access your Google Calendar!! You can close this now",
+  });
 });
 app.get("/schedule_event", async (req, res) => {
   console.log(oauth2Client.credentials.access_token);
@@ -85,24 +89,24 @@ const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
     origin: "*",
-    methods: ["GET", "POST"] 
-  }
+    methods: ["GET", "POST"],
+  },
 });
 
 io.on("connection", (socket) => {
-  console.log('a user connected');
+  console.log("a user connected");
 
   socket.on("latest", (msg) => {
-    console.log('Latest message: ' + msg);
+    console.log("Latest message: " + msg);
   });
 
   socket.on("message", (msg) => {
-    console.log('Received a message: ' + msg);
+    console.log("Received a message: " + msg);
     io.emit("message", msg);
   });
 
   socket.on("disconnect", () => {
-    console.log('user disconnected');
+    console.log("user disconnected");
   });
 });
 
