@@ -25,7 +25,7 @@ ApiController.getResponse = async (req, res, next) => {
         messages: [
           {
             role: "system",
-            content: `given the prompt: ${prompt}, show me three related activities I can do in New York. The response must be a JSON object with the name Events following properties: Event, Location, Time, Summary`,
+            content: `given the prompt: ${prompt}, show me three related activities I can do in New York this weekend. The response must be a JSON object with the name Events following properties: Event, Location, Time, Summary`,
           },
         ],
       },
