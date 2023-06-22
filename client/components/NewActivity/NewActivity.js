@@ -11,33 +11,32 @@ const NewActivity = (props) => {
   const { Event, Location, Summary, Time } = activity;
   console.log(Event, Location, Summary, Time);
   console.log("Activity!!!!!!", activity);
-  // useEffect(() => {
-  //   setActivity({
-  //     activity: "Pioneers Bar NYC",
-  //     location: "138 W 29th St, New York, NY 10001",
-  //     time: "7:00pm",
-  //     summary:
-  //       "Laid-back, late-night hangout offering craft beers on tap, bar snacks, pinball machines & pool. PIONEERS is steps away from Penn Station, Madison Square Garden, The PIT Comedy Theater …plus Herald Square, the Fashion Institute of Technology (FIT) and the world-famous Chelsea Hotel.",
-  //   });
-  // }, []);
 
   return (
     <div className="container">
       <div className="grid">
-        <div className="activity">
-          <b>{Event}</b>
-        </div>
-        <div className="location">
-          <b>{Location}</b>
-          <b>{Time}</b>
-        </div>
+        <h4>{Event}</h4>
+        <p>{Location}</p>
+        <p> {Time}</p>
+        <p>{Summary}</p>
       </div>
-      <div className="summary">{Summary}</div>
     </div>
+    // <div className="container">
+    //   <div className="grid">
+    //     <div className="activity">
+    //       <b>{Event}</b>
+    //     </div>
+    //     <div className="location">
+    //       <b>{Location}</b>
+    //       <b>{Time}</b>
+    //     </div>
+    //   </div>
+    //   <div className="summary">{Summary}</div>
+    // </div>
   );
 };
 
-// ADD BUTTON
+// ADD BUTTONx
 /**
  * button tag
  * on click, send a request to the back en
