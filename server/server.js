@@ -7,9 +7,11 @@ const { google } = require("googleapis");
 const dotenv = require("dotenv");
 const dayjs = require("dayjs");
 const PORT = 8000;
+const http = require("http");
+const { Server } = require("socket.io");
 
 dotenv.config();
-//this is the problem
+
 const uri = process.env.ATLAS_URI;
 mongoose.connect(uri, { useNewUrlParser: true });
 const connection = mongoose.connection;
@@ -24,7 +26,6 @@ const eventRouter = require("./routes/eventRouter");
 const userRouter = require("./routes/userRouter");
 const apiRouter = require("./routes/apiRouter");
 
-//user routes
 app.use("/user", userRouter);
 app.use("/api", apiRouter);
 app.use("/event", eventRouter);
@@ -40,14 +41,11 @@ const oauth2Client = new google.auth.OAuth2(
   process.env.CLIENT_SECRET,
   process.env.REDIRECT_URL
 );
-
 const scopes = ["https://www.googleapis.com/auth/calendar"];
-
 const calendar = google.calendar({
   version: "v3",
   auth: process.env.API_KEY,
 });
-
 app.get("/google", (req, res) => {
   const url = oauth2Client.generateAuthUrl({
     access_type: "offline",
@@ -55,20 +53,15 @@ app.get("/google", (req, res) => {
   });
   return res.json(url);
 });
-
 app.get("/google/redirect", async (req, res) => {
   console.log(req.query);
   const code = req.query.code;
-
   const { tokens } = await oauth2Client.getToken(code);
-
   oauth2Client.setCredentials(tokens);
-
   return res.status(200).json({
     msg: "Thank you for allowing us to access your Google Calendar!! You can close this now",
   });
 });
-
 app.get("/schedule_event", async (req, res) => {
   console.log(oauth2Client.credentials.access_token);
   await calendar.events.insert({
@@ -87,26 +80,36 @@ app.get("/schedule_event", async (req, res) => {
       },
     },
   });
-
   res.send({
     msg: "Done",
   });
 });
 
-// app.use(express.urlencoded({ extended: true }));
-
-app.get("/", (req, res) => {
-  console.log("Hello from the backend");
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"],
+  },
 });
 
-// app.listen(PORT, () => console.log(`Listening on PORT: ${PORT}`));
-app.use("*", (req, res) => res.status(400).send("Oh no! There is an error!"));
+io.on("connection", (socket) => {
+  console.log("a user connected");
 
-//global error
-app.use((err, req, res, next) => {
-  res.status(500).send({ error: err });
+  socket.on("latest", (msg) => {
+    console.log("Latest message: " + msg);
+  });
+
+  socket.on("message", (msg) => {
+    console.log("Received a message: " + msg);
+    io.emit("message", msg);
+  });
+
+  socket.on("disconnect", () => {
+    console.log("user disconnected");
+  });
 });
 
-app.listen(PORT, () => {
-  console.log("Listening on port 8000... idea generator app");
+server.listen(PORT, () => {
+  console.log(`Listening on port ${PORT}... idea generator app`);
 });

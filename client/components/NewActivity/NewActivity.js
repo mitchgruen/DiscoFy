@@ -2,20 +2,20 @@ import React, { useState, useEffect } from "react";
 import styles from "./NewActivity.scss";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 // you have to pass props into this component, and update local state based on props
 // in the next copmponent up we'll push in three of these newactivity components
 const NewActivity = (props) => {
   // console.log("Props Test", props.testActivity);
-  const { activity, user, sendEvent } = props;
+  const { activity, user } = props;
   const { name, email } = user;
   const { Event, Location, Summary, Time } = activity;
-  console.log(Event, Location, Summary, Time);
-  console.log("Activity!!!!!!", activity);
+  console.log(props);
 
-  async function sendEvent(e) {
+  async function saveEvent(e) {
     e.preventDefault();
-    e.target;
+    console.log("save");
     const response = await axios.post("http://localhost:8000/event", {
       event: Event,
       location: Location,
@@ -34,8 +34,10 @@ const NewActivity = (props) => {
         <p>{Location}</p>
         <p> {Time}</p>
         <p>{Summary}</p>
-        <button onCLick={sendEvent}>Add to Event List!</button>
       </div>
+      <button className="button" onClick={saveEvent}>
+        Add to Event List!
+      </button>
     </div>
     // <div className="container">
     //   <div className="grid">

@@ -1,5 +1,5 @@
 const express = require("express");
-const eventController = require("../");
+const eventController = require("../controller/EventController");
 const eventRouter = express.Router();
 
 //save event in database
