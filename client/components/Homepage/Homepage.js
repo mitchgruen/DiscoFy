@@ -6,9 +6,8 @@ import NewActivity from "../NewActivity/NewActivity.js";
 import axios from "axios";
 
 import { Link } from "react-router-dom";
-export const Homepage = (props) => {
-  const [chatMessage, setChatMessage] = useState("");
-  const [userInput, setUserInput] = useState("");
+
+export const Homepage = () => {
   const [input, setInput] = useState("");
   const [activity, setActivity] = useState([
     {
@@ -30,35 +29,16 @@ export const Homepage = (props) => {
       Summary: "",
     },
   ]);
+  
   // make a get request to chatgbt to display response.
   useEffect(() => {
     console.log("User: ", props);
   }, []);
 
-  //handle submissions to the database from input field
-  const submitHandler = (e) => {
-    e.preventDefault();
-    fetch("URL", {
-      method: "POST",
-      body: JSON.stringify(), // data we submit,
-      headers: {
-        "Content-type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        data.messages; // need to match the schema field that is storing the user's responses?
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-
   //handle click
   async function handleClick(e) {
     try {
-      // console.log("handle");
+      console.log("handle");
       e.preventDefault();
       // const prompt = e.target.value;
       // if (!input) return;
