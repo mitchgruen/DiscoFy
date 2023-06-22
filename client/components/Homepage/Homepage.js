@@ -1,15 +1,16 @@
 import React, {useState, useEffect} from "react";
-import styles from './Homepage.scss'
 import Button from 'react-bootstrap/Button';
 import Chatbox from '../Chatbox/Chatbox.js';
 
 import { Link } from "react-router-dom";
-export const Homepage = () => {
+export const Homepage = (props) => {
 
   const [chatMessage, setChatMessage] = useState('');
   const [userInput, setUserInput] = useState('');
   // make a get request to chatgbt to display response. 
-
+  useEffect(() => {
+    console.log("User: ", props);
+  }, []);
   // const buttonHandler = () => {
   //   console.log('buttonHandle activated')
   //   // useEffect(() => {

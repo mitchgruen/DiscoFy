@@ -7,7 +7,6 @@ const { google } = require("googleapis");
 const dotenv = require("dotenv");
 const dayjs = require("dayjs");
 const PORT = 8000;
-//this is the problem
 
 dotenv.config();
 
@@ -39,17 +38,18 @@ app.get("/google", (req, res) => {
     access_type: "offline",
     scope: scopes,
   });
-  res.redirect(url);
+  return res.json(url);
 });
 
 app.get("/google/redirect", async (req, res) => {
-  console.log(req.query.code);
+  console.log(req.query);
   const code = req.query.code;
 
   const { tokens } = await oauth2Client.getToken(code);
+
   oauth2Client.setCredentials(tokens);
 
-  return res.send("its working");
+  return res.status(200).json({ msg: "Thank you for allowing us to access your Google Calendar!! You can close this now"});
 });
 
 // Access to users information ex: email, name
