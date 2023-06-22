@@ -56,3 +56,26 @@ body h2 {
   background: paleturquoise;
   color: #131010;
 }
+
+.mainContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas:
+      "a b";
+  padding: 0px;
+}
+
+.GPTForm {
+  grid-area: a;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.activityList {
+  grid-area: b;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+}
+
