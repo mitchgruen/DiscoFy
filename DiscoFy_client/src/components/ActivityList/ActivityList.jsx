@@ -23,30 +23,31 @@ export default function ActivityList() {
           });
     }; 
 
-    useEffect(() => {
-        const newSocket = socketIoClient("http://localhost:8000", { autoConnect: false });
+    // UNCOMMENT THESE WHEN YOU'RE READY TO START WORKING ON SOCKET STUFF
+    // useEffect(() => {
+    //     const newSocket = socketIoClient("http://localhost:8000", { autoConnect: false });
     
-        const handleNewEvent = (newEvent) => {
-            addEvent(newEvent);
-        };
+    //     const handleNewEvent = (newEvent) => {
+    //         addEvent(newEvent);
+    //     };
     
-        newSocket.on("latest", handleNewEvent);
-        newSocket.on("event", handleNewEvent);
-        newSocket.connect();
+    //     newSocket.on("latest", handleNewEvent);
+    //     newSocket.on("event", handleNewEvent);
+    //     newSocket.connect();
     
-        setSocket(newSocket);
+    //     setSocket(newSocket);
     
-        return () => {
-          newSocket.off("latest", handleNewEvent);
-          newSocket.off("event", handleNewEvent);
-          newSocket.disconnect();
-        };
-    }, []);
+    //     return () => {
+    //       newSocket.off("latest", handleNewEvent);
+    //       newSocket.off("event", handleNewEvent);
+    //       newSocket.disconnect();
+    //     };
+    // }, []);
 
     return (
         <div>
             <div id="eventBox">
-                <h1>Live Activities</h1>
+                <h1>DiscoFy</h1>
                 {events.map((event, index) => (
                 <div key={index}>
                     <h4>{event.event}</h4>

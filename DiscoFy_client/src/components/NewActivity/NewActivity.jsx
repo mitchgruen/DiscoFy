@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import socketIoClient from "socket.io-client";
-
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import socketIoClient from 'socket.io-client';
 
 // you have to pass props into this component, and update local state based on props
 // in the next copmponent up we'll push in three of these newactivity components
@@ -13,7 +12,9 @@ const NewActivity = (props) => {
   const { Event, Location, Summary, Time } = activity;
 
   useEffect(() => {
-    const newSocket = socketIoClient("http://localhost:8000", { autoConnect: false });
+    const newSocket = socketIoClient('http://localhost:8000', {
+      autoConnect: false,
+    });
 
     // const handleNewMessage = (newMessage) => {
     //   addMessage(newMessage);
@@ -21,9 +22,10 @@ const NewActivity = (props) => {
 
     // newSocket.on("latest", handleNewMessage);
     // newSocket.on("message", handleNewMessage);
-    newSocket.connect();
 
-    setSocket(newSocket);
+    // UNCOMMENT THESE TWO WHEN YOU'RE READY TO START WORKING ON SOCKET STUFF
+    // newSocket.connect();
+    // setSocket(newSocket);
 
     return () => {
       // newSocket.off("latest", handleNewMessage);
@@ -34,8 +36,8 @@ const NewActivity = (props) => {
 
   async function saveEvent(e) {
     e.preventDefault();
-    console.log("save");
-    const response = await axios.post("http://localhost:8000/event", {
+    console.log('save');
+    const response = await axios.post('http://localhost:8000/event', {
       event: Event,
       location: Location,
       summary: Summary,
@@ -43,7 +45,7 @@ const NewActivity = (props) => {
       name: name,
       email: email,
     });
-    socket.emit("event", {
+    socket.emit('event', {
       event: Event,
       location: Location,
       summary: Summary,

@@ -10,7 +10,7 @@ import ActivityList from "../ActivityList/ActivityList.jsx";
 export const Homepage = (props) => {
   return (
     <div>
-      <ul>
+      {/* <ul>
         <li>
           <Link to="/homepage">Home</Link>
         </li>
@@ -20,7 +20,7 @@ export const Homepage = (props) => {
         <li>
           <Link to="/chat">Chat</Link>
         </li>
-      </ul>
+      </ul> */}
       <div className="mainContainer">
         <ChatGPTForm user={props.user} className="GPTForm" />
         <ActivityList />
