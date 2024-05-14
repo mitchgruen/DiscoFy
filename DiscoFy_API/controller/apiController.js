@@ -9,11 +9,6 @@ const { convert } = require('html-to-text');
 const { get } = require('http');
 import contentExtractor from '../functions/content-extractor';
 
-// const configuration = new Configuration({
-//   apiKey: process.env.OPEN_AI_API_KEY,
-// })
-// const openai = new OpenAIApi(configuration)
-
 // need to count tokens in a prompt to make sure it doesn't exceed the limit before sending to GPT-3
 // Need something in addition to mercury parser to trim webpages down to their essence
 
@@ -76,7 +71,6 @@ async function askGPT3(prompt) {
 }
 
 // need a function to filter urls from certain websites
-
 // Add code to exclude links from certain websites, such as bandsintown and songkick
 async function getUrlList(theme, location, time) {
   const url =
@@ -136,19 +130,6 @@ async function getContextFromUrl(url) {
   } catch (err) {
     console.error('error triggered oh my god!', err);
   }
-
-  // const prompt =
-  //   'Please parse the below text into objects for as many events/concerts/bars/restaurants/attractions as you can find within the text. The format for each object is defined as ' +
-  //   parseFormat +
-  //   'Also note these summary formats that tell you who to fill the summary property for each object: ' +
-  //   summaryFormats +
-  //   response;
-  // counter();
-  // console.log('Prompt', prompt);
-  // let condensedResponse = await askGPT3(prompt);
-  // condensedResponse += url;
-  // // console.log('Condensed Response', condensedResponse);
-  // return condensedResponse;
 }
 
 apiController.testContextExtraction = async (req, res, next) => {
@@ -212,44 +193,6 @@ apiController.getActivities = async (req, res, next) => {
   }
 };
 
-// apiController.completion = async (req, res, next) => {
-//   // const {input} = req.body;
-//   console.log('completion is activated')
-//   fetch('https://api.openai.com/v1/chat/completions', {
-//     method: 'POST',
-//     body: JSON.stringify({
-//       model: 'gpt-3.5-turbo',
-//       messages:[{role: 'user', content: "List of 10 ideas of fun things to do in New York City"}]
-//     }),
-//     headers: {
-//       Authorization: 'Bearer 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',
-//       'Content-Type': 'Application/json'
-//     }
-//   })
-//   .then(response => response.json())
-//   .then( async (data) => {
-//     console.log('WOOOOOOOW', data)
-//     console.log('YEEEEEEOBJECTS', data.choices[0].message.content);
-//     const response = await Api.create({
-//       messages: data.choices[0].message.content
-//     })
-//     res.locals.ideas = response;
-//     console.log('OKK', res.locals.ideas)
-//     next()
-//   })
-// }
-
-// apiController.getApi = async (req, res, next) => {
-//   try {
-//     const response = await Api.find({})
-//     res.locals.messages = response;
-//     return next();
-//     }
-//   catch (err) {
-//     return next(err);
-//   }
-// }
-/*
 fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
     body: JSON.stringify({
